@@ -1,0 +1,18 @@
+
+version: 2
+
+models:
+    - name: raw_roster
+      description: "Raw roster data from GainzWarz"
+      columns:
+          - name: athlete
+            description: "The primary key for this table, athlete is used across
+            the platform for analytics"
+            tests:
+                - unique
+                - not_null
+
+sources:
+  - name: gg_raw
+    tables:
+      - name: gg_raw_roster
