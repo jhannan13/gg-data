@@ -2,17 +2,32 @@
 version: 2
 
 models:
-    - name: raw_roster
-      description: "Raw roster data from GainzWarz"
+    - name: game_titles
+      description: "Raw title data"
       columns:
-          - name: athlete
-            description: "The primary key for this table, athlete is used across
-            the platform for analytics"
+          - name: game_title_key
+            description: "The primary key for this table - specifies game"
             tests:
                 - unique
                 - not_null
 
 sources:
-  - name: gg_raw
+  - name: source
     tables:
-      - name: gg_raw_roster
+      - name: game_titles
+        description: "Stores different games across portfolio for tournaments"
+      - name: lifetime_gameplay
+        description: "Bulk api pull for overall data of players, data is at
+        point in time"
+      - name: tournament_roster
+        description: "Weekly available roster for tournaments"
+      - name: tournament_rules
+        description: "Weekly decided ruleset for specified tournament"
+      - name: tournament_teams
+        description: "Drafted teams and captains"
+      - name: tournament_weeks
+        description: "Stores timelines for when tournaments are played in epoch"
+      - name: user_attributes
+        description: "User attribute data used for marketing and analytics"
+      - name: users
+        description: "Represents user at sign-up"
