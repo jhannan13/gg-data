@@ -16,6 +16,9 @@ sources:
     tables:
       - name: game_titles
         description: "Stores different games across portfolio for tournaments"
+        columns:
+          - name: game_title_key
+          - name: game_title_name
       - name: lifetime_gameplay
         description: "Bulk api pull for overall data of players, data is at
         point in time"
