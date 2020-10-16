@@ -54,6 +54,11 @@ select
   pt.*
   , ua.platform
   , ua.python_tag
+  , concat('https://my.callofduty.com/api/papi-client/crm/cod/v2/title/mw/platform/'
+    , ua.platform,'/gamer/', pt.athlete_user_key, '/matches/wz/start/'
+    , pt.start_time_epoch,'/end/', pt.end_time_epoch,'/details') as api_url
+  , concat(platform,'/gamer/',athlete_user_key) as python_tag_clean
+
 
 from pivot_teams as pt
 left join {{ ref('user_attributes') }} as ua
