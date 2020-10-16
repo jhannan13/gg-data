@@ -20,3 +20,5 @@ select
   , game_time_elapsed
 
 from {{ source('source', 'tournament_gameplay') }}
+
+where game_mode = 'br_brquads'
