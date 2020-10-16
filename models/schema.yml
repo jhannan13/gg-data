@@ -34,3 +34,5 @@ sources:
         description: "User attribute data used for marketing and analytics"
       - name: users
         description: "Represents user at sign-up"
+      - name: tournament_gameplay
+        description: "Output of get_games.py"
