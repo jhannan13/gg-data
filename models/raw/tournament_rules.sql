@@ -5,6 +5,7 @@ select
   , second_place
   , third_place
   , fourth_place
+  , fifth_place
   , top_ten
   , top_fifteen
   , top_twenty_five
