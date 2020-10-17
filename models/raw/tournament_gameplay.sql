@@ -13,7 +13,7 @@ select
   , distance_traveled
   , kill_death_ratio
   , kills
-  , team_moving_pct as time_moving_pct
+  , time_moving_pct
   , score
   , score_per_minute
   , placement
