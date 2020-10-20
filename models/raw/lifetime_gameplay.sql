@@ -22,3 +22,6 @@ select
   , level
 
 from {{ source('source', 'lifetime_gameplay') }}
+
+where user_key is not null
+  and wins is not null
