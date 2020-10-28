@@ -18,7 +18,18 @@ select
   , score_per_minute
   , placement
   , game_time_elapsed
+  , unix_match_end
+  , uno_key
+  , coalesce(cast(crates_opened as int64), 0) as crates_opened
+  , coalesce(cast(scavs_completed as int64), 0) as scavs_completed
+  , coalesce(cast(bounties_completed as int64), 0) as bounties_completed
+  , coalesce(cast(flags_completed as int64), 0) as flags_completed
+  , coalesce(cast(supply_runs_completed as int64), 0) as supply_runs_completed
+  , headshots
+  , wall_bangs
+  , gulag_kills
+  , gulag_deaths
 
 from {{ source('source', 'tournament_gameplay') }}
 
-where game_mode = 'br_brquads'
+where game_mode in ('br_brquads', 'br_brhwnquad')

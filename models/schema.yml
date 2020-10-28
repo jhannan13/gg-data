@@ -10,6 +10,8 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: draft_data
+      description: "this model houses the quartiled player data for draft night"  
 
 sources:
   - name: source
