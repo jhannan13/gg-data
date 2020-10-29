@@ -20,6 +20,7 @@ select
   , sum(wall_bangs) as wall_bangs
   , sum(gulag_kills) as gulag_kills
   , sum(gulag_deaths) as gulag_deaths
+  , sum(distance_traveled) as distance_traveled
 
 from {{ ref('tournament_gameplay') }}
 
@@ -59,6 +60,7 @@ select
    , mp.wall_bangs
    , mp.gulag_kills
    , mp.gulag_deaths
+   , mp.distance_traveled
 
 from match_placements as mp
 left join {{ ref('tournament_rules') }} as tr
@@ -90,6 +92,7 @@ select
   , gms.wall_bangs
   , gms.gulag_kills
   , gms.gulag_deaths
+  , gms.distance_traveled
   , row_number() over (partition by gms.tournament_week_key, gms.game_title_key, gms.team_number order by (gms.points + gms.kill_points) desc) as game_rank
 
 from game_match_scores as gms
@@ -132,6 +135,7 @@ select
   , sum(tg.wall_bangs) as wall_bangs
   , sum(tg.gulag_kills) as gulag_kills
   , sum(tg.gulag_deaths) as gulag_deaths
+  , sum(tg.distance_traveled) as distance_traveled
 
 from total_games as tg
 left join {{ ref('tournament_teams') }}  as tt
@@ -141,6 +145,5 @@ left join {{ ref('tournament_teams') }}  as tt
 left join {{ ref('draft_data') }} as dd
   on tg.tournament_week_key = dd.tournament_week_key
   and tg.athlete_user_key = dd.user_key
-
 
 group by 1,2,3,4,5,6,7,8,9
