@@ -34,12 +34,14 @@ select
    , mp.kills * tr.points_per_kill as kill_points
    , mp.damage_dealt
    , mp.damage_taken
+   , max(mp.kills) as high_kill_game
 
 from match_placements as mp
 left join {{ ref('tournament_rules') }} as tr
   on mp.tournament_week_key = tr.tournament_week_key
 
 where mp.tournament_week_key is not null
+group by 1,2,3,4,5,6,7,8
 )
 
 , row_number_games as (
@@ -52,10 +54,10 @@ select
   , gms.kill_points
   , gms.damage_dealt
   , gms.damage_taken
+  , gms.high_kill_game
   , row_number() over (partition by gms.tournament_week_key, gms.game_title_key, gms.team_number order by (gms.points + gms.kill_points) desc) as game_rank
 
 from game_match_scores as gms
-
 )
 
 , top_five_games as (
@@ -73,6 +75,7 @@ select
   , sum(tfg.damage_dealt) as damage_dealt
   , sum(tfg.damage_taken) as damage_taken
   , sum(tfg.points) as placement_score
+  , max(tfg.high_kill_game) as high_kill_game
   , sum(tfg.kill_points) as kill_points
   , sum(tfg.points) + sum(tfg.kill_points)  as total_score
 
