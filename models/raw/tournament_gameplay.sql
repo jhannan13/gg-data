@@ -32,4 +32,4 @@ select
 
 from {{ source('source', 'tournament_gameplay') }}
 
-where game_mode in ('br_brquads', 'br_brhwnquad')
+where game_mode in ('br_brquads', 'br_brhwnquad', 'br_89', 'br_25')

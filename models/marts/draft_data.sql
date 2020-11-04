@@ -7,6 +7,7 @@ select
   , lp.kills
   , lp.deaths
   , lp.wins
+  , lp.games_played
 
 from {{ ref('lifetime_gameplay') }} as lp
 
