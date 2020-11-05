@@ -29,6 +29,7 @@ select
   , wall_bangs
   , gulag_kills
   , gulag_deaths
+  , most_wanteds
 
 from {{ source('source', 'tournament_gameplay') }}
 
