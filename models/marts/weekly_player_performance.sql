@@ -21,7 +21,7 @@ select
   , sum(gulag_kills) as gulag_kills
   , sum(gulag_deaths) as gulag_deaths
   , sum(distance_traveled) as distance_traveled
-  , sum(most_wanteds) as most_wanteds
+  , sum(most_wanted) as most_wanteds
 
 from {{ ref('tournament_gameplay') }}
 

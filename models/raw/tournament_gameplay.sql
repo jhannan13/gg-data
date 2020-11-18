@@ -29,7 +29,7 @@ select
   , wall_bangs
   , gulag_kills
   , gulag_deaths
-  , most_wanteds
+  , coalesce(cast(most_wanted as int64), 0) as most_wanted
 
 from {{ source('source', 'tournament_gameplay') }}
 
