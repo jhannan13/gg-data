@@ -1,15 +1,15 @@
 with match_placements as (
 select
-  tournament_week_key
-  , game_title_key
-  , team_number
-  , match_id
-  , min(placement) as team_placement
-  , sum(kills) as kills
-  , sum(damage_done) as damage_dealt
-  , sum(damage_taken) as damage_taken
+  tp.tournament_week_key
+  , tp.game_title_key
+  , tp.team_number
+  , tp.match_id
+  , min(tp.placement) as team_placement
+  , sum(tp.kills) as kills
+  , sum(tp.damage_done) as damage_dealt
+  , sum(tp.damage_taken) as damage_taken
 
-from {{ ref('tournament_gameplay') }}
+from {{ ref('tournament_gameplay') }} as tp
 
 group by 1,2,3,4
 )
