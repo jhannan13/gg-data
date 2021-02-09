@@ -6,6 +6,5 @@ select
   , timestamp_millis(week_end) as week_end_utc
   , week_start as week_start_epoch
   , week_end as week_end_epoch
-  , notes
 
 from {{ source('source', 'tournament_weeks') }}
