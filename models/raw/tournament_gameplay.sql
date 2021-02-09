@@ -29,7 +29,8 @@ select
   , wall_bangs
   , gulag_kills
   , gulag_deaths
+  , coalesce(cast(most_wanted as int64), 0) as most_wanted
 
 from {{ source('source', 'tournament_gameplay') }}
 
-where game_mode in ('br_brquads', 'br_brhwnquad')
+where game_mode in ('br_brquads', 'br_brhwnquad', 'br_89', 'br_25')

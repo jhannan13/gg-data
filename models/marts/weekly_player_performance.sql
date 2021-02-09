@@ -21,6 +21,7 @@ select
   , sum(gulag_kills) as gulag_kills
   , sum(gulag_deaths) as gulag_deaths
   , sum(distance_traveled) as distance_traveled
+  , sum(most_wanted) as most_wanteds
 
 from {{ ref('tournament_gameplay') }}
 
@@ -61,6 +62,7 @@ select
    , mp.gulag_kills
    , mp.gulag_deaths
    , mp.distance_traveled
+   , mp.most_wanteds
 
 from match_placements as mp
 left join {{ ref('tournament_rules') }} as tr
@@ -93,6 +95,7 @@ select
   , gms.gulag_kills
   , gms.gulag_deaths
   , gms.distance_traveled
+  , gms.most_wanteds
   , row_number() over (partition by gms.tournament_week_key, gms.game_title_key, gms.team_number order by (gms.points + gms.kill_points) desc) as game_rank
 
 from game_match_scores as gms
@@ -136,6 +139,7 @@ select
   , sum(tg.gulag_kills) as gulag_kills
   , sum(tg.gulag_deaths) as gulag_deaths
   , sum(tg.distance_traveled) as distance_traveled
+  , sum(tg.most_wanteds) as most_wanteds
 
 from total_games as tg
 left join {{ ref('tournament_teams') }}  as tt

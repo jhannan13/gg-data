@@ -1,15 +1,15 @@
 with match_placements as (
 select
-  tournament_week_key
-  , game_title_key
-  , team_number
-  , match_id
-  , min(placement) as team_placement
-  , sum(kills) as kills
-  , sum(damage_done) as damage_dealt
-  , sum(damage_taken) as damage_taken
+  tp.tournament_week_key
+  , tp.game_title_key
+  , tp.team_number
+  , tp.match_id
+  , min(tp.placement) as team_placement
+  , sum(tp.kills) as kills
+  , sum(tp.damage_done) as damage_dealt
+  , sum(tp.damage_taken) as damage_taken
 
-from {{ ref('tournament_gameplay') }}
+from {{ ref('tournament_gameplay') }} as tp
 
 group by 1,2,3,4
 )
@@ -21,14 +21,14 @@ select
   , mp.team_placement
   , mp.team_number
   , case
-      when mp.team_placement = 1 then first_place
-      when mp.team_placement = 2 then second_place
-      when mp.team_placement = 3 then third_place
-      when mp.team_placement = 4 then fourth_place
-      when mp.team_placement = 5 then fifth_place
-      when mp.team_placement <= 10 then top_ten
-      when mp.team_placement <= 15 then top_fifteen
-      when mp.team_placement <= 25 then top_twenty_five
+      when mp.team_placement = 1 then tr.first_place
+      when mp.team_placement = 2 then tr.second_place
+      when mp.team_placement = 3 then tr.third_place
+      when mp.team_placement = 4 then tr.fourth_place
+      when mp.team_placement = 5 then tr.fifth_place
+      when mp.team_placement <= 10 then tr.top_ten
+      when mp.team_placement <= 15 then tr.top_fifteen
+      when mp.team_placement <= 25 then tr.top_twenty_five
       else 0
     end as points
    , mp.kills * tr.points_per_kill as kill_points
